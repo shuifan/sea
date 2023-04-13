@@ -28,6 +28,9 @@ def celery(argv, app):
 @jobm.job("async_task", proxy=True, inapp=False,
           help="invoke celery cmds for async tasks")
 def async_task(argv):
+    if "gevent" in argv:
+        from gevent.monkey import patch_all
+        patch_all()
     return celery(argv, "async_task")
 
 
