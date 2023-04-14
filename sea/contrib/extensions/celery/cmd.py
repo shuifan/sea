@@ -31,6 +31,9 @@ def async_task(argv):
     if "gevent" in argv:
         from gevent.monkey import patch_all
         patch_all()
+    if "eventlet" in argv:
+        import eventlet
+        eventlet.monkey_patch()
     return celery(argv, "async_task")
 
 
